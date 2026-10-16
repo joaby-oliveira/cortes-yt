@@ -34,17 +34,22 @@ novo: pule para o próximo passo que falta.
    só se a história fechar mais curta, porque não monetiza no TikTok). Notas nos 5 critérios,
    porquê, alertas, título (até 60 caracteres), titulo_curto, descrição, 1 a 3 hashtags.
 7. Grave o `cortes.json` e rode `cortes ranquear --validar` até passar.
-8. Mostre a tabela impressa.
+8. **Mostre a lista na sua mensagem.** O terminal do Claude Code esconde a saída dos comandos,
+   então o usuário NÃO vê o que o `cortes ranquear --validar` imprimiu. Copie a lista inteira
+   (todos os cortes, na ordem, com título, nota, tempo, gancho, por quê e ⚠️) como texto da sua
+   resposta. Se precisar dela de novo, rode `cortes ranquear --mostrar`. Acrescente no fim, em
+   1 a 2 linhas, observações suas (cortes que se sobrepõem, risco de denúncia).
+   Só depois dessa mensagem faça a pergunta do passo 9.
 
 ## 4. Escolher os cortes
-9. AskUserQuestion, header "Cortes", pergunta "Quais cortes eu corto?":
+9. AskUserQuestion, header "Cortes", pergunta "Quais cortes eu corto? (lista acima)":
    - "Top 3 (1, 2, 3)" — se as notas forem boas, marque "(Recomendado)"
    - "Top 5 (1 a 5)"
    - "Todos com nota ≥ 7" (diga quais números entram na descrição da opção)
    - "Nenhum, quero outro vídeo"
    O usuário pode digitar números em "Outro" (ex.: 2,5,7).
 10. Se ele pedir ajustes ("começa 5 s antes", "troca o título do 3"), edite o `cortes.json`,
-    valide de novo, mostre a tabela e volte ao passo 9.
+    valide de novo, mostre a lista de novo na mensagem e volte ao passo 9.
 
 ## 5. Cortar
 11. Rode `cortes cortar <números>`. Responda em poucas linhas: pasta e nomes dos arquivos.

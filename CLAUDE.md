@@ -33,7 +33,8 @@ de perguntar o canal.
 3. Leia **a transcrição inteira** (arquivos longos: leia em partes até o fim) e grave o
    `cortes.json` no caminho indicado, seguindo o formato do pedido.
 4. `cortes ranquear --validar`. Se acusar erro, corrija o JSON e valide de novo.
-5. Mostre ao usuário a tabela impressa e **PARE**. Não corte nada antes da escolha.
+5. Copie a lista impressa para a sua mensagem (o terminal esconde a saída dos comandos;
+   `cortes ranquear --mostrar` reimprime) e **PARE**. Não corte nada antes da escolha.
 6. Com os números escolhidos: `cortes cortar 2,5,7` (aceita intervalos: `1-4`).
 7. Informe a pasta de saída. Ao final do lote, ofereça `cortes limpar` para apagar o vídeo baixado.
 

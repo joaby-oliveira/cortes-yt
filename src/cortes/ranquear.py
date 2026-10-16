@@ -117,6 +117,30 @@ def _celula(txt: str) -> str:
     return str(txt).replace("|", "/").replace("\n", " ").strip()
 
 
+def lista_compacta(cortes: list[dict]) -> str:
+    """Formato que cabe no terminal: um bloco curto por corte."""
+    blocos = []
+    for c in cortes:
+        dur = hms_para_seg(c["fim"]) - hms_para_seg(c["inicio"])
+        avisos = [c["alertas"]] if c.get("alertas") else []
+        if dur < 61:
+            avisos.append("menos de 1 min: não monetiza no TikTok")
+        b = (f"**{c['n']}. {c['titulo']}** — nota {c['nota']} · {c['inicio']}–{c['fim']} ({dur:.0f}s)\n"
+             f"   Gancho: \"{c['gancho']}\"\n"
+             f"   Por quê: {c['porque']}")
+        if avisos:
+            b += f"\n   ⚠️ {'; '.join(avisos)}"
+        blocos.append(b)
+    return "\n\n".join(blocos)
+
+
+def mostrar(sessao: Path) -> None:
+    arq = sessao / "lista.md"
+    if not arq.is_file():
+        raise ErroCortes("Ainda não há lista validada. Rode: cortes ranquear --validar")
+    print(arq.read_text(encoding="utf-8"))
+
+
 def validar(sessao: Path, cfg: Config) -> None:
     arq = sessao / "cortes.json"
     if not arq.is_file():
@@ -159,5 +183,7 @@ def validar(sessao: Path, cfg: Config) -> None:
             f"{' '.join(c['hashtags'])} |")
     tabela = "\n".join(linhas)
     (sessao / "tabela.md").write_text(tabela, encoding="utf-8")
-    print(tabela)
+    lista = lista_compacta(cortes)
+    (sessao / "lista.md").write_text(lista, encoding="utf-8")
+    print(lista)
     print("\nEscolha os números e rode: cortes cortar 1,3,5")

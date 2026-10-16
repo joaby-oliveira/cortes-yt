@@ -45,7 +45,8 @@ def main(argv: list[str] | None = None) -> int:
     t.add_argument("--fonte", help="apelido da fonte no nome do arquivo (ex.: flow)")
 
     r = sub.add_parser("ranquear", help="gera o pedido para o agente ou valida cortes.json")
-    r.add_argument("--validar", action="store_true", help="valida, ordena e imprime a tabela")
+    r.add_argument("--validar", action="store_true", help="valida, ordena e imprime a lista")
+    r.add_argument("--mostrar", action="store_true", help="reimprime a lista validada")
     r.add_argument("--sessao")
 
     c = sub.add_parser("cortar", help="corta os números escolhidos (ex.: 2,5,7 ou 1-4)")
@@ -72,7 +73,10 @@ def main(argv: list[str] | None = None) -> int:
         elif args.cmd == "ranquear":
             from . import ranquear
             sessao = sessao_atual(cfg, args.sessao)
-            (ranquear.validar if args.validar else ranquear.preparar)(sessao, cfg)
+            if args.mostrar:
+                ranquear.mostrar(sessao)
+            else:
+                (ranquear.validar if args.validar else ranquear.preparar)(sessao, cfg)
         elif args.cmd == "cortar":
             from .cortar import executar
             executar(args.numeros, sessao_atual(cfg, args.sessao), cfg)
