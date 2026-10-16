@@ -27,7 +27,8 @@ Transcrição com timestamps: `{transcricao}`
 ## Tarefa
 1. Leia a transcrição inteira.
 2. Escolha de 8 a 12 trechos de {dmin:.0f} a {dmax:.0f} segundos que funcionem sozinhos,
-   sem contexto do episódio. Prefira começar exatamente na frase-gancho e terminar logo
+   sem contexto do episódio. O ideal é 61 a 90 s (monetiza no TikTok); use menos de 61 s
+   só quando a história fecha mais curta e esticar estragaria o ritmo. Prefira começar exatamente na frase-gancho e terminar logo
    após o desfecho/reação (o CLI ainda soma {folga:.0f} s de folga em cada ponta).
 3. Dê nota de 0 a 10 para cada critério; a nota final é a média dos 5:
    - gancho: os 3 primeiros segundos prendem sozinhos?
@@ -91,6 +92,7 @@ def _validar_um(i: int, c: dict, cfg: Config, dur_video: float | None) -> list[s
     except ErroCortes as e:
         return [f"corte {i}: {e}"]
     dur = fim - ini
+    c["curto"] = dur < 61
     if not cfg.duracao_min <= dur <= cfg.duracao_max:
         erros.append(f"corte {i}: duração {dur:.0f}s fora de {cfg.duracao_min:.0f}-{cfg.duracao_max:.0f}s")
     if dur_video and fim > dur_video:
@@ -147,7 +149,10 @@ def validar(sessao: Path, cfg: Config) -> None:
     linhas = [cab, "|" + "---|" * 9]
     for c in cortes:
         dur = hms_para_seg(c["fim"]) - hms_para_seg(c["inicio"])
-        porque = c["porque"] + (f" ⚠️ {c['alertas']}" if c.get("alertas") else "")
+        avisos = [c["alertas"]] if c.get("alertas") else []
+        if dur < 61:
+            avisos.append("menos de 1 min: não monetiza no TikTok")
+        porque = c["porque"] + (f" ⚠️ {'; '.join(avisos)}" if avisos else "")
         linhas.append(
             f"| {c['n']} | {c['inicio']} | {c['fim']} | {dur:.0f}s | {_celula(c['gancho'])} | "
             f"{c['nota']} | {_celula(porque)} | {_celula(c['titulo'])} | "

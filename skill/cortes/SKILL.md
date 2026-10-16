@@ -17,8 +17,9 @@ Responda em português do Brasil.
 1. Rode `cortes transcrever "<link>" --canal <canal> --fonte <fonte>`.
    Se cair no Whisper, avise que vai demorar (CPU) e aguarde.
 2. Rode `cortes ranquear` e siga o pedido que ele imprimir.
-3. Leia a transcrição inteira, em partes se for longa. Escolha de 8 a 12 trechos de 61 a 90 s
-   que funcionem sozinhos. Para cada um, dê nota de 0 a 10 nos 5 critérios (gancho, arco,
+3. Leia a transcrição inteira, em partes se for longa. Escolha de 8 a 12 trechos de 30 a 90 s
+   que funcionem sozinhos (ideal 61–90 s; menos de 61 s só se a história fechar mais curta,
+   porque não monetiza no TikTok). Para cada um, dê nota de 0 a 10 nos 5 critérios (gancho, arco,
    emoção, comentável, compartilhável), escreva o porquê, os alertas, o título (até 60
    caracteres), o titulo_curto, a descrição e de 1 a 3 hashtags.
 4. Grave o `cortes.json` no caminho do pedido e rode `cortes ranquear --validar` até passar.

@@ -33,7 +33,7 @@ Não há API de IA. **Você** lê a transcrição e escolhe os trechos. O CLI `c
 7. Informe a pasta de saída. Ao final do lote, ofereça `cortes limpar` para apagar o vídeo baixado.
 
 ## Critérios de escolha
-- 8 a 12 trechos de 61 a 90 s que funcionem sozinhos, sem contexto do episódio.
+- 8 a 12 trechos de 30 a 90 s que funcionem sozinhos (ideal 61–90 s; abaixo de 61 s só se a história fechar mais curta, porque não monetiza no TikTok), sem contexto do episódio.
 - Começar na frase-gancho; terminar logo após o desfecho ou a reação. O CLI soma 3 s de folga.
 - Nota = média de 5 critérios (0–10): gancho, arco (começo/virada/desfecho), emoção,
   comentável, compartilhável. Seja exigente: 9+ só para trecho realmente forte.

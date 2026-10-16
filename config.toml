@@ -16,7 +16,7 @@ dispositivo = "cpu"   # "cpu" ou "cuda"
 
 [corte]
 folga_s = 3          # segundos extras no início e no fim de cada corte
-duracao_min = 61
+duracao_min = 30       # abaixo de 61 s o TikTok não monetiza (a tabela avisa)
 duracao_max = 90
 crf = 18             # qualidade do x264 (menor = melhor, arquivo maior)
 preset = "medium"    # "fast" corta mais rápido na CPU, arquivo um pouco maior
