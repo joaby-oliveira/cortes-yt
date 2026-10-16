@@ -21,13 +21,13 @@ Não há API de IA. **Você** lê a transcrição e escolhe os trechos. O CLI `c
 
 ## Modo interativo
 Se o usuário digitar `/cortes` ou pedir "me guia", siga a Skill `cortes`: uma pergunta por vez com
-AskUserQuestion (canal, fonte, cortes escolhidos, próximo passo). Use `cortes info "<link>"` antes
-de perguntar o canal e a fonte.
+AskUserQuestion (canal, cortes escolhidos, próximo passo). Use `cortes info "<link>"` antes
+de perguntar o canal.
 
 ## Fluxo (quando o usuário manda um link e o canal)
-1. `cortes transcrever "<link>" --canal humor|automobilismo --fonte <apelido>`
-   - `--fonte` é curto e sem espaço: flow, inteligencia, podpah, ticaracaticast...
-     Se o usuário não disser, deduza pelo canal de origem.
+1. `cortes transcrever "<link>" --canal humor|automobilismo`
+   - A fonte (apelido no nome do arquivo) sai automática do canal do YouTube. Só passe
+     `--fonte <apelido>` se o usuário pedir um nome específico.
    - Sem legenda PT ele transcreve com Whisper na CPU: avise que pode demorar.
 2. `cortes ranquear` — imprime o pedido com critérios, caminho da transcrição e formato do JSON.
 3. Leia **a transcrição inteira** (arquivos longos: leia em partes até o fim) e grave o

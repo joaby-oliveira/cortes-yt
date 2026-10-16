@@ -14,6 +14,17 @@ LINGUAS = ["pt-orig", "pt", "pt-BR"]
 BLOCO_S = 6.0  # junta as falas em linhas de ~6 s para a transcrição ficar enxuta
 
 
+RUIDO_FONTE = {"podcast", "oficial", "official", "cortes", "corte", "canal", "tv", "channel",
+               "videos", "clips", "o", "a", "the", "do", "da", "de", "dos", "das"}
+
+
+def fonte_auto(meta: dict) -> str:
+    """Apelido curto da fonte a partir do canal do YouTube (ex.: 'Flow Podcast' -> 'flow')."""
+    nome = meta.get("channel") or meta.get("uploader") or "fonte"
+    partes = [p for p in slug(nome, 60).split("-") if p not in RUIDO_FONTE]
+    return slug("-".join(partes[:2]) or nome, 20)
+
+
 def _opts_base() -> dict:
     return {"quiet": True, "no_warnings": True, "noprogress": True}
 
@@ -108,7 +119,7 @@ def mostrar_info(link: str) -> None:
     origem = meta.get("channel") or meta.get("uploader") or "?"
     print(f"Título: {meta.get('title')}")
     print(f"Canal de origem: {origem}")
-    print(f"Fonte sugerida: {slug(origem, 20)}")
+    print(f"Fonte: {fonte_auto(meta)}")
     print(f"Duração: {seg_para_hms(meta.get('duration') or 0)}")
     if escolha:
         print(f"Legenda PT: sim ({'automática' if escolha[1] else 'manual'})")
@@ -123,7 +134,7 @@ def executar(link: str, canal: str, fonte: str | None, cfg: Config) -> Path:
     info("Lendo informações do vídeo...")
     meta = _info_video(link)
     vid = meta.get("id", "video")
-    fonte = slug(fonte or meta.get("channel") or meta.get("uploader") or "fonte", 20)
+    fonte = slug(fonte, 20) if fonte else fonte_auto(meta)
     hoje = dt.date.today().isoformat()
     pasta = cfg.pasta_trabalho / f"{hoje}_{canal}_{fonte}_{vid}"
     pasta.mkdir(parents=True, exist_ok=True)

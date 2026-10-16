@@ -10,7 +10,7 @@ ferramenta **AskUserQuestion** (múltipla escolha; o usuário sempre pode digita
 Nunca peça para o usuário digitar comandos: você roda o CLI `cortes`. Português do Brasil,
 mensagens curtas.
 
-Se o usuário já deu alguma informação (link, canal, fonte) junto com /cortes, não pergunte de
+Se o usuário já deu alguma informação (link, canal) junto com /cortes, não pergunte de
 novo: pule para o próximo passo que falta.
 
 ## 1. Coletar o pedido
@@ -21,12 +21,11 @@ novo: pule para o próximo passo que falta.
    coloque esse primeiro com "(Recomendado)".
    Antes de perguntar, rode `cortes info "<link>"` e mostre numa linha o título, o canal de
    origem, a duração e se há legenda PT. Use o canal de origem para recomendar o canal.
-3. **Fonte** — AskUserQuestion, header "Fonte": opção 1 = apelido curto do canal de origem
-   (ex.: flow, podpah, inteligencia) "(Recomendado)"; opção 2 = a "Fonte sugerida" do `cortes info`
-   se for diferente, ou outra grafia plausível.
+   A fonte (apelido do programa no nome do arquivo) é automática, tirada do canal do YouTube.
+   Não pergunte.
 
 ## 2. Transcrever
-4. Rode `cortes transcrever "<link>" --canal <canal> --fonte <fonte>`.
+3. Rode `cortes transcrever "<link>" --canal <canal>`.
    Se cair no Whisper, avise numa linha que vai demorar (CPU) e espere.
 
 ## 3. Ranquear

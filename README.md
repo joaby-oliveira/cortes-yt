@@ -46,7 +46,7 @@ Com `--editable`, alterações no código valem na hora, sem reinstalar.
 New-Item -ItemType Directory -Force $HOME\.claude\skills | Out-Null
 Copy-Item -Recurse -Force skill\cortes $HOME\.claude\skills\
 ```
-No Claude Code, digite `/cortes` e responda as perguntas (link, canal, fonte, quais cortes).
+No Claude Code, digite `/cortes` e responda as perguntas (link, canal, quais cortes).
 
 ## 5. Manutenção
 - Atualizar o projeto: `git pull` dentro de `cortes-cli` (e copie a Skill de novo se ela mudou)
@@ -55,7 +55,7 @@ No Claude Code, digite `/cortes` e responda as perguntas (link, canal, fonte, qu
 
 ## Uso rápido (manual, sem agente)
 ```powershell
-cortes transcrever "https://youtu.be/XXXX" --canal humor --fonte flow
+cortes transcrever "https://youtu.be/XXXX" --canal humor
 cortes ranquear            # pedido para o agente
 cortes ranquear --validar  # depois que o cortes.json existir
 cortes cortar 1,3,5
