@@ -1,0 +1,22 @@
+# Configuração do CLI cortes.
+# "~" vira a sua pasta de usuário (C:/Users/<você>). Use barras normais (/).
+
+pasta_cortes = "~/Videos/cortes"
+
+# Onde ficam transcrições, vídeo baixado e cortes.json de cada sessão.
+# Vazio = <pasta_cortes>/_trabalho
+pasta_trabalho = ""
+
+[whisper]
+# Só usado quando o vídeo não tem legenda automática em português.
+# Sem placa NVIDIA: "small" é o mais prático na CPU (~1/4 do tempo do vídeo).
+# "medium" é mais preciso, mas pode levar quase o tempo do episódio.
+modelo = "small"
+dispositivo = "cpu"   # "cpu" ou "cuda"
+
+[corte]
+folga_s = 3          # segundos extras no início e no fim de cada corte
+duracao_min = 61
+duracao_max = 90
+crf = 18             # qualidade do x264 (menor = melhor, arquivo maior)
+preset = "medium"    # "fast" corta mais rápido na CPU, arquivo um pouco maior
