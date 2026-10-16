@@ -12,6 +12,7 @@ winget install Python.Python.3.12
 winget install Gyan.FFmpeg
 winget install DenoLand.Deno
 winget install astral-sh.uv
+winget install Git.Git
 ```
 Feche e abra o PowerShell de novo para o PATH atualizar. Confira:
 ```powershell
@@ -19,9 +20,10 @@ python --version; ffmpeg -version; deno --version; uv --version
 ```
 
 ## 2. Projeto
-Descompacte o `cortes-cli.zip` em, por exemplo, `C:\Users\<você>\Projetos\cortes-cli`. Depois:
 ```powershell
-cd $HOME\Projetos\cortes-cli
+mkdir $HOME\Projetos -Force; cd $HOME\Projetos
+git clone https://github.com/joaby-oliveira/cortes-yt.git cortes-cli
+cd cortes-cli
 uv tool install --editable .
 cortes iniciar
 cortes status
@@ -47,6 +49,7 @@ Copy-Item -Recurse -Force skill\cortes $HOME\.claude\skills\
 No Claude Code, use `/cortes <link> humor` ou só cole o link e diga o canal.
 
 ## 5. Manutenção
+- Atualizar o projeto: `git pull` dentro de `cortes-cli` (e copie a Skill de novo se ela mudou)
 - yt-dlp quebrou no YouTube? `uv tool upgrade cortes --reinstall-package yt-dlp`
 - Primeira transcrição com Whisper baixa o modelo (~500 MB para `small`), só uma vez.
 
