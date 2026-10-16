@@ -36,6 +36,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--version", action="version", version=__version__)
     sub = p.add_subparsers(dest="cmd", required=True)
 
+    i = sub.add_parser("info", help="mostra título, canal de origem, duração e se há legenda PT")
+    i.add_argument("link")
+
     t = sub.add_parser("transcrever", help="baixa legenda PT ou transcreve com Whisper")
     t.add_argument("link")
     t.add_argument("--canal", required=True, choices=CANAIS)
@@ -60,7 +63,10 @@ def main(argv: list[str] | None = None) -> int:
     args = p.parse_args(argv)
     cfg = carregar_config()
     try:
-        if args.cmd == "transcrever":
+        if args.cmd == "info":
+            from .transcrever import mostrar_info
+            mostrar_info(args.link)
+        elif args.cmd == "transcrever":
             from .transcrever import executar
             executar(args.link, args.canal, args.fonte, cfg)
         elif args.cmd == "ranquear":

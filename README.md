@@ -46,7 +46,7 @@ Com `--editable`, alterações no código valem na hora, sem reinstalar.
 New-Item -ItemType Directory -Force $HOME\.claude\skills | Out-Null
 Copy-Item -Recurse -Force skill\cortes $HOME\.claude\skills\
 ```
-No Claude Code, use `/cortes <link> humor` ou só cole o link e diga o canal.
+No Claude Code, digite `/cortes` e responda as perguntas (link, canal, fonte, quais cortes).
 
 ## 5. Manutenção
 - Atualizar o projeto: `git pull` dentro de `cortes-cli` (e copie a Skill de novo se ela mudou)

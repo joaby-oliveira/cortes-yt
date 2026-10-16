@@ -102,6 +102,20 @@ def _agrupar(segs: list[tuple[float, float, str]]) -> list[tuple[float, str]]:
     return linhas
 
 
+def mostrar_info(link: str) -> None:
+    meta = _info_video(link)
+    escolha = _escolher_lingua(meta)
+    origem = meta.get("channel") or meta.get("uploader") or "?"
+    print(f"Título: {meta.get('title')}")
+    print(f"Canal de origem: {origem}")
+    print(f"Fonte sugerida: {slug(origem, 20)}")
+    print(f"Duração: {seg_para_hms(meta.get('duration') or 0)}")
+    if escolha:
+        print(f"Legenda PT: sim ({'automática' if escolha[1] else 'manual'})")
+    else:
+        print("Legenda PT: não (vai usar Whisper na CPU, demora)")
+
+
 def executar(link: str, canal: str, fonte: str | None, cfg: Config) -> Path:
     if canal not in CANAIS:
         raise ErroCortes(f"Canal deve ser um de: {', '.join(CANAIS)}")

@@ -19,6 +19,11 @@ Um corte vai só para o próprio canal, nunca para o outro.
 Não há API de IA. **Você** lê a transcrição e escolhe os trechos. O CLI `cortes` faz o resto
 (download, legenda, Whisper, validação, ffmpeg, nomes de arquivo).
 
+## Modo interativo
+Se o usuário digitar `/cortes` ou pedir "me guia", siga a Skill `cortes`: uma pergunta por vez com
+AskUserQuestion (canal, fonte, cortes escolhidos, próximo passo). Use `cortes info "<link>"` antes
+de perguntar o canal e a fonte.
+
 ## Fluxo (quando o usuário manda um link e o canal)
 1. `cortes transcrever "<link>" --canal humor|automobilismo --fonte <apelido>`
    - `--fonte` é curto e sem espaço: flow, inteligencia, podpah, ticaracaticast...
